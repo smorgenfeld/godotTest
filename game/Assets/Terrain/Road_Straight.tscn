@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Assets/Terrain/roadStraight.vox" type="ArrayMesh" id=1]
+
+[sub_resource type="BoxShape" id=6]
+
+[sub_resource type="BoxShape" id=7]
+
+[sub_resource type="BoxShape" id=3]
+
+[sub_resource type="BoxShape" id=4]
+
+[sub_resource type="BoxShape" id=5]
+
+[node name="Road_Straight" type="StaticBody"]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0 )
+
+[node name="Mesh" type="MeshInstance" parent="."]
+mesh = ExtResource( 1 )
+material/0 = null
+
+[node name="Center" type="CollisionShape" parent="."]
+transform = Transform( 9, 0, 0, 0, 1, 0, 0, 0, 48, 0, 0.5, 0 )
+shape = SubResource( 6 )
+
+[node name="Main" type="CollisionShape" parent="."]
+transform = Transform( 48, 0, 0, 0, 0.5, 0, 0, 0, 48, 0, 0, 0 )
+shape = SubResource( 7 )
+
+[node name="Center_Low" type="CollisionShape" parent="."]
+transform = Transform( 9, 0, 0, 0, 0.5, 0, 0, 0, 48, 0, 0.5, 0 )
+visible = false
+shape = SubResource( 3 )
+disabled = true
+
+[node name="Curb1" type="CollisionShape" parent="."]
+transform = Transform( 1.5, 0, 0, 0, 0.5, 0, 0, 0, 48, 46.5, 0.5, 0 )
+shape = SubResource( 4 )
+
+[node name="Curb2" type="CollisionShape" parent="."]
+transform = Transform( 1.5, 0, 0, 0, 0.5, 0, 0, 0, 48, -46.5, 0.5, 0 )
+shape = SubResource( 5 )

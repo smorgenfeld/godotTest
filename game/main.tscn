@@ -1,0 +1,90 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://Assets/Textures/TexturesCom_MetalFloorsBare0063_2_seamless_S.jpg" type="Texture" id=1]
+[ext_resource path="res://CarBody.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/code/camera.gd" type="Script" id=3]
+[ext_resource path="res://world.gd" type="Script" id=4]
+[ext_resource path="res://Assets/Terrain/Road_Straight.tscn" type="PackedScene" id=5]
+
+[sub_resource type="BoxShape" id=1]
+
+[sub_resource type="SpatialMaterial" id=2]
+albedo_texture = ExtResource( 1 )
+uv1_scale = Vector3( 500, 500, 500 )
+
+[sub_resource type="PlaneMesh" id=3]
+size = Vector2( 1000, 1000 )
+subdivide_width = 10
+subdivide_depth = 10
+
+[sub_resource type="BoxShape" id=4]
+
+[sub_resource type="BoxShape" id=5]
+
+[sub_resource type="BoxShape" id=6]
+
+[sub_resource type="BoxShape" id=7]
+
+[sub_resource type="BoxShape" id=8]
+
+[sub_resource type="CubeMesh" id=9]
+
+[node name="Main" type="Spatial"]
+
+[node name="Ground" type="StaticBody" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="Ground"]
+transform = Transform( 100, 0, 0, 0, 1, 0, 0, 0, 100, 0, -1, 0 )
+shape = SubResource( 1 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Ground"]
+material_override = SubResource( 2 )
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="CollisionShape2" type="CollisionShape" parent="Ground"]
+transform = Transform( 1, 0, 0, 0, 100, 0, 0, 0, 100, 100, 0, 0 )
+shape = SubResource( 4 )
+
+[node name="CollisionShape3" type="CollisionShape" parent="Ground"]
+transform = Transform( 1, 0, 0, 0, 100, 0, 0, 0, 100, -100, 0, 0 )
+shape = SubResource( 5 )
+
+[node name="CollisionShape4" type="CollisionShape" parent="Ground"]
+transform = Transform( 100, 0, 0, 0, 100, 0, 0, 0, 1, 0, 0, 100 )
+shape = SubResource( 6 )
+disabled = true
+
+[node name="CollisionShape5" type="CollisionShape" parent="Ground"]
+transform = Transform( 100, 0, 0, 0, 100, 0, 0, 0, 1, 0, 0, -100 )
+shape = SubResource( 7 )
+
+[node name="CollisionShape6" type="CollisionShape" parent="Ground"]
+transform = Transform( 9.87688, -0.156434, 0, 1.56434, 0.987688, 0, 0, 0, 3, 19.3204, 0, 0 )
+shape = SubResource( 8 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="Ground/CollisionShape6"]
+transform = Transform( 1, -9.31323e-010, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+mesh = SubResource( 9 )
+material/0 = null
+
+[node name="Sun" type="DirectionalLight" parent="."]
+transform = Transform( 0.218107, -0.826854, -0.518404, 0.0240199, -0.526483, 0.849846, -0.975629, -0.19781, -0.0949687, 0, 5, 0 )
+shadow_enabled = true
+
+[node name="Car" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.176062, 0 )
+
+[node name="CarBody" parent="Car" instance=ExtResource( 2 )]
+Cs = 40000
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 5.25909, 9.28835, 0.542017 )
+script = ExtResource( 3 )
+followThisPath = NodePath("../Car/CarBody")
+
+[node name="Terrain" type="Spatial" parent="."]
+script = ExtResource( 4 )
+player = NodePath("../Car/CarBody")
+
+[node name="Road_Straight" parent="Terrain" instance=ExtResource( 5 )]

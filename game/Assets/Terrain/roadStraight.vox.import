@@ -1,0 +1,13 @@
+[remap]
+
+importer="MagicaVoxel-Importer"
+type="Mesh"
+path="res://.import/roadStraight.vox-e18a6911e4541010d30ae4d40c27a533.mesh"
+
+[deps]
+
+source_file="res://Assets/Terrain/roadStraight.vox"
+dest_files=[ "res://.import/roadStraight.vox-e18a6911e4541010d30ae4d40c27a533.mesh" ]
+
+[params]
+
